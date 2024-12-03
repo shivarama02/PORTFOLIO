@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>PHOTO FOLIO ADMIN</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'admin/assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'admin/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Nunito:300,400,600,700|Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'admin/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'admin/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'admin/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'admin/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'admin/assets/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{% static 'admin/assets/img/logo.png' %}"  alt="JALDHI">
+        <img src="{% static 'admin/assets/img/logo_name.png' %}" class="logo_text">
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+   
+    
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item dropdown pe-3"> 
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <!-- <img src="{{ user_profile.image.url }}" alt="Profile" class="rounded-circle"/> -->
+            <span class="d-none d-md-block dropdown-toggle ps-2">user.username </span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>user.username</h6>
+              <span>user.email </span>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        {% block content4 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link " href="#">
+        <i class="bi bi-house"></i>
+        <span>Home</span>
+      </a>
+      {% endblock %}
+        {% block content1 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link collapsed" href="{% url 'editprofile' %}">
+        <i class="bi bi-plus-circle"></i>
+        <span>Edit Profile</span>
+      </a>
+      {% endblock %}
+        
+      </li>
+      <li class="nav-item">
+        {% block content2 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link collapsed" href="{% url 'editphotofolio' %}">
+        <i class="bi bi-hourglass-split"></i>
+        <span>Edit Photofolio</span>
+      </a>
+      {% endblock %}
+       
+      </li>
+      <li class="nav-item">
+        {% block content3 %}
+      <!-- Your dynamic content goes here -->
+      <a class="nav-link collapsed" href="#">
+        <i class="bi bi-check-circle"></i>
+        <span>Completed Tasks</span>
+      </a>
+      {% endblock %}
+       
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main -->
+  <main id="main" class="main">
+    
+    <section class="section dashboard p-0">
+      {% block content %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h2 class="display-4">Welcome Username</h2>
+
+      
+        <hr class="my-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h4></h4>
+        <p>This admin panel is designed to Manage your profile, Update your PhotoFolio details , and to update your latest projects with Photofolio</p>
+        <p><small>Kindly Contact Developer for any queries</small></p>
+        <a class="btn btn-outline-danger btn-sm " href="#" role="button">Get Help</a>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <div class="card">
+                <img src="{% static 'admin/assets/img/add_task.png' %}" class="card-img-top" alt="Add Task">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Profile</h5>
+                    <p class="card-text">Customize your profile information and update your details</p>
+                    <a href="{% url 'editprofile' %}" class="btn btn-secondary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img src="{% static 'admin/assets/img/completed_tasks.png' %}" class="card-img-top" alt="Pending Tasks">
+                <div class="card-body">
+                    <h5 class="card-title">Update your PhotoFolio details</h5>
+                    <p class="card-text">Customize all your Heading , Paragraph </p>
+                    <a href="#" class="btn btn-secondary">Edit PhotoFolio</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="card">
+                <img src="{% static 'admin/assets/img/pending_tasks.png' %}" class="card-img-top" alt="Completed Tasks">
+                <div class="card-body">
+                    <h5 class="card-title">Add new project</h5>
+                    <p class="card-text">>Showcase your lastest work with detailed descriptions, images, and links</p>
+                    <a href="#" class="btn btn-secondary">Add Project</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="card">
+                <img src="{% static 'admin/assets/img/remove.png' %}" class="card-img-top" alt="Completed Tasks">
+                <div class="card-body">
+                    <h5 class="card-title">Remove  project</h5>
+                    <p class="card-text">>Remove your previous works</p>
+                    <a href="#" class="btn btn-secondary">Remove Project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+{% endblock %}
+    </section>
+  </main>
+
+  <!-- Footer -->
+  {% comment %} <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 text-lg-start text-center">
+          <p>&copy; PHOTOFOOLIO. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer> {% endcomment %}
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'admin/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  
+  <!-- Template Main JS File -->
+  <script src="{% static 'admin/assets/js/main.js' %}"></script>
+</body>
+
+</html>
