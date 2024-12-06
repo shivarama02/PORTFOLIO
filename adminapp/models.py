@@ -48,6 +48,7 @@ class Projects(models.Model):
     project_picture = models.ImageField(upload_to='project_pictures')
     project_category = models.CharField(max_length=200)
     project_description = models.TextField()
+    project_url = models.CharField(max_length=500,default='https://randomlink')
     client_name = models.CharField(max_length=200)
     client_note = models.CharField(max_length=200)
     project_date = models.DateField()
